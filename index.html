@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wie humanistisch bin ich?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+body {
+    background: #f5f7fa;
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+
+/* Layout des Quizzes, bestimmt die Breite, Höhe, Margin, Padding des containers.*/
+.worldview-quiz {
+    width: calc(100% - 32px);
+    max-width: 980px;
+    min-height: 550px;
+    margin: 30px auto;
+    padding: 38px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 14px 34px rgba(7, 7, 7, 0.2);
+}
+/* Theme spacing von WP verhindern*/
+.worldview-quiz *,
+.worldview-quiz *::before,
+.worldview-quiz *::after {  box-sizing: border-box; }
+
+/* ----------------------------------------Seite: Wilkommen -------------------------------- */
+ .worldview-quiz .quiz-welcome {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 28px 0 0;
+    margin: 0;
+}
+
+.worldview-quiz .quiz-welcome h2 {
+padding-top: 16px;
+    font-size: 36px !important;
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: "Roboto", sans-serif;
+    margin: 0 0 14px;
+    color: #0053a6;
+}
+
+.worldview-quiz .quiz-welcome p {
+    max-width: 640px;
+    font-family: "Roboto", sans-serif;
+    margin: 0 auto 26px;
+    color: #000000;
+    font-size: 16px;
+    line-height: 1.6;
+   strong {
+    font-weight: 548;
+    color: #0053a6;   
+}
+} 
+.worldview-quiz .quiz-welcome p:last-of-type {
+    border-top: 0;
+}
+.worldview-quiz .quiz-start {
+    padding: 13px 31px;
+    margin: 4px 0 32px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 0;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    padding-bottom: 9px;
+    background: #0053a6;
+}
+.worldview-quiz .quiz-welcome .quiz-inspiration {
+    max-width: 620px;
+    margin: 32px auto 0;
+    
+	padding-top: 100px;
+    border-top: 1px solid #e6eef6;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #777777;
+}
+
+.worldview-quiz .quiz-welcome .quiz-inspiration a {
+    color: #0053a6;
+    text-decoration: underline;
+}
+
+.worldview-quiz .quiz-start:hover {
+  border: 2px solid #0053a6;
+  background: #ffffff;
+  color: #0053a6;
+  border-color: #0053a6;
+  }
+
+
+/*-----------------------------------Anfang der Fragen ------------------------------------*/
+ 
+/*für Seiten sepperation*/
+.quiz-step.active {
+    display: block;
+    animation: quizFadeIn 0.3s ease;
+}
+.quiz-step {
+    display: none;
+}
+ .worldview-quiz .quiz-step h2 {
+    margin: 0 0 18px;
+    line-height: 1.3;
+    color: #0053a6;
+    font-size: 24px;
+    padding-bottom: 8px;
+    font-family: "Roboto", sans-serif;
+}
+
+
+/*---Karten Layout auf der Seite: 3,4 oder 5---*/
+
+/* Antworten Karte layout */
+.worldview-quiz .quiz-answers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: start;
+    margin: 2px;
+    padding: 0;
+}	
+	
+/* Genau 3 Antworten -> 3 Karten nebeneinander */
+.worldview-quiz .quiz-answers:has(> label:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+/* Bei 3 Antworten Höhe */
+.worldview-quiz .quiz-answers:has(> label:nth-child(3):last-child) label span {
+    height: 258px;
+}
+/* Grid für die 3 Antworten */
+.worldview-quiz .quiz-answers:has(> label:nth-child(3):last-child)
+    label:last-child {
+    grid-column: auto;
+}
+
+/* Für 4 Antworten */
+.worldview-quiz .quiz-answers label span {
+    height: 130px;
+    display: flex;
+    align-items: center;
+}
+
+/* Genau 5 Antworten*/
+.worldview-quiz .quiz-answers:has(> label:nth-child(5):last-child) label span {
+    height: 93px;
+}
+
+/* Bei 5 Karten, eine Karte alleine --> full width */
+.worldview-quiz .quiz-answers label:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+/*---Die Karten: Farbe, Schrift.. ----*/
+.worldview-quiz .quiz-step label span {
+ position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 4px 0;
+    width: 100%;
+    padding: 16px 18px;
+    line-height: 1.45;
+    border: 2px solid transparent;
+     font-size: 18px;
+     font-family: "Roboto", sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.worldview-quiz .quiz-step input[type="radio"] {
+    display: none;
+}
+ 
+.worldview-quiz .quiz-answers label span {
+color: #0e0e0e;
+   background: #e6ecf4;
+   padding-left: 26px;
+   box-shadow: 0 4px 13px rgba(3, 3, 3, 0.09);
+}
+ 
+.worldview-quiz .quiz-step label:hover span {
+    transform: translateY(-2px);
+   color: #ffffff;
+  background: #0053a6;
+}
+ 
+/* Farbe if checked*/
+.worldview-quiz .quiz-answers label input:checked + span {
+    background: #0053a6;
+    color: #ffffff;
+    }
+ 
+/*-----------------------Progress bar-------------------*/
+.quiz-progress {
+    height: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 13px rgba(3, 3, 3, 0.08);
+    border-radius: 999px;
+    }
+.quiz-progress-bar {
+    width: 14%;
+    height: 100%;
+    background: linear-gradient( #0053a6);
+    border-radius: 999px;
+    transition: width 0.3s ease;}
+ 
+.quiz-progress-text {
+    margin-bottom: 14px;
+    color: #0053a6;
+    font-size: 14px;
+     font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+ 
+/*---------------------------Weiter und Zurück Buttons ----------------------*/
+ 
+/* min height mit die Buttons dort bleiben wo sie sein sollen*/
+.worldview-quiz .quiz-step { min-height: 374px;}
+ 
+/* für die Zurück und Weiter Buttons */
+.quiz-navigation {
+    margin-top: 25px;
+     display: flex;
+}
+.quiz-back {
+    font-size: 15px;
+    font-weight: 700;
+     font-family: "Roboto", sans-serif;
+    color: #0053a6;
+    background: transparent;
+    border: transparent;
+    transition: transform 0.15s ease;
+       margin-right: auto;
+	   }   
+.quiz-back:hover{
+    transform: translateY(-2px);}
+   
+.quiz-forward {
+    font-size: 16px;
+    font-weight: 700;
+     font-family: "Roboto", sans-serif;
+    color: #0053a6;
+    background: transparent;
+    border: transparent;
+    transition: transform 0.15s ease;
+    margin-left: auto;
+	}
+.quiz-forward:hover{
+transform: translateY(-2px);
+}
+    
+ 
+/* ----------------------------------Ergebnisseite ------------------------- */
+.worldview-result {
+    padding: 28px;
+    text-align: center;
+    animation: quizFadeIn 0.3s ease;
+}
+.worldview-result .result-heading {
+    font-size: 24px;
+    font-weight: 600;
+     font-family: "Roboto", sans-serif;
+     background-color: #0053a6;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+    margin-top: 10px;
+   
+}
+.worldview-result .result-score {
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 8px;
+}
+.worldview-result .result-message {
+font-weight: 300;
+    color: #080808;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 6px;
+    margin-bottom:10px;
+    font-size: 16px;
+    font-weight: 515;
+}
+ .quiz-restart {
+   font-size: 14px;
+   font-weight: 700;
+   font-family: "Roboto", sans-serif;
+   color: #0053a6;
+   background: transparent;
+   border: transparent;
+   transition: transform 0.15s ease; 	
+	}
+.quiz-restart:hover{
+    transform: translateY(-2px);}
+	
+/*--------------------------------CTA Bereich----------------------- */
+.worldview-result .result-cta-title {
+    margin: 22px 0 16px;
+    color: #0b0b0b;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+}
+.worldview-result .result-cta-primary-container {
+    margin-bottom: 14px;
+}
+.worldview-result .result-cta-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+.worldview-result .quiz-cta-button {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 15px;
+     font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+ 
+.worldview-result .quiz-cta-primary {
+    border: 0;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    background: #0053a4;
+    border-color: #0053a4;
+    border: 2px solid transparent;
+    }
+.worldview-result .quiz-cta-primary:hover {
+  border: 2px solid #0053a6;
+  background: #ffffff;
+  color: #0053a6;
+}
+ 
+.worldview-result .quiz-cta-secondary {
+    padding: 10px 22px;
+    font-size: 14px;
+    border: 2px solid transparent;
+    font-family: "Roboto", sans-serif;
+    color: #0053a6;
+    background:  #eaf4fb; 
+}
+.worldview-result .quiz-cta-secondary:hover {
+  border: 2px solid #0053a6;
+  background: #ffffff;
+  color: #0053a6;
+  border-color: #0053a6;
+}
+
+/* Tertiäre CTA: Text mit Links */
+.worldview-result .result-cta-tertiary {
+    margin: 4px 0 22px;
+}
+.worldview-result .result-cta-tertiary-text {
+    max-width: 560px;
+    margin: 0 auto;
+    color: #333333;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    padding-top: 4px;
+    line-height: 1.6;
+}
+.worldview-result .result-cta-tertiary-text .tertiary-link {
+    color: #0053a6;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.worldview-result .result-cta-tertiary-text .tertiary-link:hover {
+    color: #003a75;
+}
+
+/* ----------------------------Mobile Anssicht und fade in------------------------- */
+@keyframes quizFadeIn {
+    from { opacity: 0; transform: translateY(8px);} 
+	to { opacity: 1; transform: translateY(0);}
+}
+@media (max-width: 600px) {
+.worldview-quiz .quiz-answers label span,
+.worldview-quiz .quiz-answers:has(> label:nth-child(3):last-child) label span {
+    height: auto;
+    min-height: 70px;
+}
+    .worldview-quiz .quiz-answers,
+    .worldview-quiz .quiz-answers:has(> label:nth-child(3):last-child) {
+        grid-template-columns: 1fr;
+    }
+
+@media (max-width: 600px) {
+    .worldview-quiz {
+     padding: 16px;
+     margin: 16px auto;
+    }
+    .worldview-quiz .quiz-welcome {
+     padding: 32px 16px;
+     margin: 0;
+    }
+    .worldview-quiz .quiz-welcome h2 { font-size: 28px; }
+    .worldview-quiz .quiz-welcome h3 { font-size: 16px; margin-bottom: 20px; }
+    .worldview-quiz .quiz-step h2 { font-size: 19px; }
+    .worldview-quiz .quiz-answers { grid-template-columns: 1fr; }
+    .worldview-quiz .quiz-step label span {
+        font-size: 16px;
+        padding: 12px 14px; 
+		}}
+    
+}
+
+</style>
+</head>
+<body>
+<div class="worldview-quiz"
+    data-cta-humanismus="https://humanismus.de/humanistische-standpunkte/"
+    data-cta-magazin="https://diesseits.de/"
+    data-cta-newsletter="https://humanismus.de/newsletter/"
+    data-cta-mitglied="https://humanismus.de/ueber-uns/mitgliedschaft/"
+    data-cta-angebote="https://humanismus.de/praktischer-humanismus/"
+    data-cta-landesverband="https://humanismus.de/hvd-vor-ort/landesverbaende/"
+    data-cta-podcast="https://humanismus.de/podcast/"
+    data-cta-veranstaltungen="https://humanismus.de/"
+    >
+		
+        <div class="quiz-progress" hidden>
+            <div class="quiz-progress-bar"></div>
+        </div>
+        <p class="quiz-progress-text" hidden> Frage <span class="current-question">1</span> von <span class="total-questions">8</span></p>
+       <section class="quiz-step quiz-welcome active">
+
+    <h2>Wie humanistisch bin ich?</h2>
+
+<p>
+    Viele Menschen teilen humanistische Überzeugungen, ohne sich selbst als Humanist*in zu bezeichnen.
+    Wer Wissenschaft und Vernunft als wichtige Grundlagen betrachtet und das eigene Leben an Mitgefühl,
+    Selbstbestimmung und Verantwortung orientiert, trägt vielleicht mehr Humanismus in sich,
+    als zunächst gedacht.
+</p>
+
+    <button type="button" class="quiz-start"> Quiz starten</button>
+    <p class="quiz-welcome-sub">
+    </p>
+
+    <p class="quiz-inspiration">
+        Wir danken
+        <a href="https://humanists.uk/humanism/how-humanist-are-you/"
+           target="_blank"
+           rel="noopener noreferrer">
+            Humanists UK
+        </a>
+        für die Inspiration zu diesem Quiz.
+    </p>
+
+</section>
+    <form class="worldview-quiz-form" hidden>
+    <section class="quiz-step" data-step="1"> <h2>Wenn ich sterbe, ...</h2>
+        <div class="quiz-answers">
+                    <label> <input type="radio" name="q1" value="0"> 
+		            <span>werde ich in einem neuen Körper wiedergeboren. </span></label>
+                    <label> <input type="radio" name="q1" value="1"><span>weiß ich nicht, 
+                        was passieren wird.</span></label>
+                    <label> <input type="radio" name="q1" value="0"> 
+					<span>werde ich an einem anderen Ort weiterexistieren.</span></label>
+                    <label> <input type="radio" name="q1" value="2"> 
+				    <span>sehe ich keine Belege dafür, dass ich auf irgendeine Weise weiterexistieren werde, daher wird der Tod höchstwahrscheinlich mein Ende sein.</span> </label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="2"><h2>Ich kann zwischen richtig und falsch unterscheiden, indem ich …</h2>
+                <div class="quiz-answers">
+                    <label><input type="radio" name="q2" value="2">
+				    <span>selbst über ein Problem nachdenke und die Konsequenzen meiner Handlungen und ihre Auswirkungen auf andere berücksichtige.</span></label>
+                    <label><input type="radio" name="q2" value="0"><span>das auswähle, 
+                        was für mich am besten ist, ohne dabei andere zu berücksichtigen.</span></label>
+                    <label><input type="radio" name="q2" value="0">
+				    <span>ein heiliges Buch zu Rate ziehe oder auf eine religiöse Autorität höre.</span></label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="3"><h2>Der Sinn in meinem Leben kommt von …</h2>
+                <div class="quiz-answers">
+                    <label><input type="radio" name="q3" value="2">
+					<span>nirgendwo. Es gibt keine höhere Macht und das Leben hat keinen übergeordneten Sinn.</span></label>
+                    <label><input type="radio" name="q3" value="1">
+					<span>dem Verfolgen meiner Ziele, Ambitionen, Hobbys und Projekte.</span></label>
+                    <label><input type="radio" name="q3" value="1">
+					<span>meinen Beziehungen zu anderen Menschen, meinen Erfahrungen und den Gefühlen, die daraus entstehen.</span> </label>
+                    <label><input type="radio" name="q3" value="0">
+					<span>einer höheren Macht, die einen Plan für uns Menschen hat.</span></label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="4"><h2>Ich behandle Tiere …</h2>
+                <div class="quiz-answers">
+                    <label> <input type="radio" name="q4" value="2"><span>mit Respekt, 
+                        weil auch sie leiden können.</span></label>
+                    <label><input type="radio" name="q4" value="0">
+					<span>mit Respekt, weil sie Teil von Gottes Schöpfung sind.</span></label>
+                    <label><input type="radio" name="q4" value="0">
+				    <span>so, wie ich es für richtig halte 
+                        
+                    – sie haben keine Seele und wurden geschaffen, damit wir sie nutzen.</span></label>
+                <label><input type="radio" name="q4" value="1">
+				<span>freundlich, weil sie süß und flauschig und netter als Menschen sind.</span></label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="5"><h2>Glaubst du, dass es einen Gott gibt?</h2>
+                <div class="quiz-answers">
+                      <label><input type="radio" name="q5" value="0">
+					  <span>Ich denke, dass es mehrere Götter und/oder Göttinnen gibt.</span></label>
+                      <label><input type="radio" name="q5" value="2">
+					  <span>Ich sehe keine Belege für Götter oder Göttinnen, daher glaube ich nicht, dass sie existieren.</span></label>
+                      <label><input type="radio" name="q5" value="0">
+					  <span>Ich denke, dass es einen Gott gibt.</span></label>
+                      <label><input type="radio" name="q5" value="1">
+					  <span>Ich sehe keine Belege für Götter oder Göttinnen, daher weiß ich es nicht.</span></label>
+                </div>
+            </section>
+   <section class="quiz-step" data-step="6">
+   <h2>Der Staat sollte, wenn es um Religionen und Weltanschauungen geht, …</h2>
+                <div class="quiz-answers">
+                    <label><input type="radio" name="q6" value="2">
+					<span>alle Religionen und Weltanschauungen gleich behandeln.</span></label>
+                    <label><input type="radio" name="q6" value="1">
+					<span>Religionen und Weltanschauungen strikt vom Staat trennen.</span></label>
+                    <label><input type="radio" name="q6" value="0">
+					<span>eine Religion oder Weltanschauung zur Grundlage staatlicher Entscheidungen machen.</span></label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="7">
+	<h2>Wenn ich eine einzigartige Naturlandschaft betrachte, denke ich …</h2>
+                <div class="quiz-answers">
+                    <label><input type="radio" name="q7" value="2">
+					<span>dass genau solche Momente das Leben lebenswert machen.</span></label>
+                    <label><input type="radio" name="q7" value="0">
+					<span>dass sie von Gott erschaffen worden sein muss, um so vollkommen zu sein.</span></label>
+                    <label><input type="radio" name="q7" value="2">
+					<span>dass wir alles tun sollten, um solche Orte für zukünftige Generationen zu bewahren.</span></label>
+                </div>
+            </section>
+    <section class="quiz-step" data-step="8"><h2>Ich halte etwas am ehesten für wahr, wenn …</h2>
+                <div class="quiz-answers">
+                    <label>
+                        <input type="radio" name="q8" value="0">
+                        <span>mein Bauchgefühl mir sagt, dass es stimmt.</span></label>
+                    <label><input type="radio" name="q8" value="0">
+					<span>es mir von einer religiösen Autorität gesagt wird.</span></label>
+                    <label><input type="radio" name="q8" value="0">
+					<span>es in einem heiligen Text steht.</span></label>
+                    <label><input type="radio" name="q8" value="2">
+					<span>ich Belege sehe, die ich für gültig halte.</span></label>
+                    <label><input type="radio" name="q8" value="1">
+				    <span>vertrauenswürdige Personen mir von Beweisen berichten, die sie für überzeugend halten.</span></label>
+                    
+                </div>
+            </section>
+    <section class="quiz-step" data-step="9"><h2>Andere Menschen sind wichtig und sollten mit Respekt behandelt werden, weil …</h2>
+                <div class="quiz-answers">
+                    <label>
+                        <input type="radio" name="q9" value="0">
+                        <span>sie für mich nützlich sind.</span></label>
+                    <label><input type="radio" name="q9" value="2">
+					<span> sie Menschen mit Gefühlen sind – genau wie ich.</span></label>
+                    <label><input type="radio" name="q9" value="1">
+					<span>wir dann alle glücklicher sind, wenn wir einander gut behandeln.</span></label>
+                    <label><input type="radio" name="q9" value="0">
+					<span>Gott uns alle nach seinem Ebenbild geschaffen hat.</span></label>
+                  
+                    
+                </div>
+            </section>
+    <section class="quiz-step" data-step="10"><h2>Ich glaube, dass das Universum …</h2>
+                <div class="quiz-answers">
+                    <label>
+                        <input type="radio" name="q10" value="0">
+                        <span>als Teil eines göttlichen Plans erschaffen wurde.</span></label>
+                    <label><input type="radio" name="q10" value="2">
+					<span> ein natürlicher Ort ist und sich am besten durch die Wissenschaft verstehen lässt.</span></label>
+                
+                    <label><input type="radio" name="q10" value="1">
+				    <span>ein natürlicher Ort ist. Ich glaube aber auch, dass es eine weitere, übernatürliche
+Ebene der Wirklichkeit gibt.</span></label>
+                    
+                </div>
+            </section>
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-back" hidden>Zurück</button>
+				<button type="button" class="quiz-forward">Weiter</button>		
+            </div>
+        </form>
+ 
+        <div class="worldview-result" hidden>
+            <h2 class="result-heading"></h2>
+            <p class="result-score"></p> <p class="result-message"></p> <p class="result-cta-title"></p>
+            <div class="result-cta-primary-container"></div>
+            <div class="result-cta-secondary"></div>
+            <div class="result-cta-tertiary">
+    <p class="result-cta-tertiary-text"></p>
+</div>
+            <button type="button" class="quiz-restart">Nochmal starten</button>
+        </div>
+    </div>
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+    
+// -----------------------Ergebnisseite mit call to actions ------------------------
+
+/*
+ * Die CTA Definitionen speichern einmal Label, also die Schrift eines Buttons für eine bestimmte Punktanzahl.
+ * Key zeigt auf den Link, der im HTML ist. Die Results greifen auf die CTA Definitions zu.
+ */
+const CTA_definitionen = {
+    humanismus: {
+        label: 'Mehr über Humanismus erfahren →',
+        datenKey: 'ctaHumanismus'
+    },
+    magazin: {
+    label: '↗ diesseits.de lesen',
+    datenKey: 'ctaMagazin'
+},
+newsletter: {
+    label: '✉ Newsletter abonnieren',
+    datenKey: 'ctaNewsletter'
+},
+angebote: {
+    label: 'Oder unsere Angebote einsehen',
+    datenKey: 'ctaAngebote'
+},
+mitglied: {
+    label: 'Mitglied und Freund*in in einem unserer Landesverbände werden',
+    datenKey: 'ctaLandesverband'
+},
+podcast: {
+    label: '♪ Podcast hören',
+    datenKey: 'ctaPodcast'
+},
+veranstaltungen: {
+    label: 'Veranstaltung besuchen',
+    datenKey: 'ctaVeranstaltungen'
+}
+};
+
+// Die Ergebnisse nach Punkten 
+const Ergebnisse = [
+
+    {
+        min: 0,
+        max: 25,
+        heading: 'Eher traditionelle Weltanschauung',
+        message: 'Die Antworten liegen eher im Bereich traditioneller oder religiös geprägter Weltbilder. Auch ohne eine humanistische Einordnung gibt es oft mehr gemeinsame Anliegen als zunächst vermutet.',
+        ctaTitle: 'Eine eindeutige Einordnung ist nicht nötig, vielleicht lohnt es sich, mehr über Humanismus und humanistische Perspektiven zu erfahren.',
+        primary: 'humanismus',
+        secondary: ['magazin','newsletter']
+    },
+
+
+    {
+        min: 26,
+        max: 50,
+        heading: 'Gemischtes Weltbild',
+        message: 'Die Antworten bewegen sich zwischen unterschiedlichen Weltanschauungen. In einigen Punkten zeigen sich bereits Überschneidungen mit humanistischen Perspektiven.',
+
+        ctaTitle: 'Wer sich näher mit Humanismus beschäftigen möchte, findet hier weitere Informationen und Einblicke.',
+        primary: 'humanismus',
+        secondary: ['magazin','newsletter']
+    },
+
+
+    {
+        min: 51,
+        max: 75,
+        heading: 'Nahe am Humanismus',
+        message: 'Viele Antworten zeigen eine deutliche Nähe zu humanistischen Perspektiven. Vielleicht ist jetzt ein guter Zeitpunkt, Humanismus noch näher kennenzulernen.',
+        primary: 'humanismus',
+        secondary: ['magazin','newsletter','podcast'],
+
+        tertiaryText: 'Jetzt {mitglied|Mitglied}/Freund*in in einem der LV werden, eine {veranstaltungen|Veranstaltungen} besuchen oder unsere {angebote|Angebote} einsehen.'  
+         },
+
+
+    {
+        min: 76,
+        max: 100,
+        heading: 'Sehr humanistisch',
+        message: 'Die Antworten entsprechen in vielen Bereichen humanistischen Perspektiven. Vielleicht ist jetzt der richtige Moment, selbst aktiv zu werden.',
+        primary: 'humanismus',
+        secondary: ['magazin','newsletter','podcast'],
+
+        tertiaryText: 'Jetzt {mitglied|Mitglied}/Freund*in in einem der LV werden, eine {veranstaltungen|Veranstaltungen} besuchen oder unsere {angebote|Angebote} einsehen.' 
+
+    }
+];
+
+// Holt den Prozentwert aus dem Ergebnisse Array und gibt ihn zurück.
+function holeBandFuerProzentwert(prozentwert) {
+    return Ergebnisse.find(function (band) {
+        return prozentwert >= band.min && prozentwert <= band.max;
+    });
+}
+
+// Holt den Key, also den Link auf die CTA Definitionen, und gibt ihn zurück.
+function holeCtaLink(quiz, schluessel) {
+    const definition = CTA_definitionen[schluessel];
+    if (! definition) { return ''; }
+    const wert = quiz.dataset[definition.datenKey];
+    return wert;
+}
+
+// Baut den CTA Button (CSS/HTML) mit dem Link und der Schrift aus den CTA Definitionen.
+function baueCtaButton(quiz, schluessel, istPrimaer) {
+    const definition = CTA_definitionen[schluessel];
+    const link = document.createElement('a');
+
+    link.href = holeCtaLink(quiz, schluessel);
+    link.textContent = definition.label;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    if (istPrimaer) {
+        link.className = 'quiz-cta-button quiz-cta-primary';
+    } else {
+        link.className = 'quiz-cta-button quiz-cta-secondary';
+    }
+
+    return link;
+}
+
+/*
+ * Baut den Text für die tertiäre CTA und ersetzt darin Platzhalter der Form
+ * {schluessel|Linktext} durch einen echten Key Link aus CTA_definitionen sein. Linktext ist Beschreibung. 
+ */
+function baueTertiaerText(quiz, text) {
+    return text.replace(/\{(\w+)\|([^}]+)\}/g, function (ganzerMatch, schluessel, ankerText) {
+        const link = holeCtaLink(quiz, schluessel);
+        if (! link) { return ankerText; }
+        return '<a href="' + link + '" target="_blank" rel="noopener noreferrer" class="tertiary-link">' + ankerText + '</a>';
+    });
+}
+
+// Baut die Buttons auf der Ergebnisseite auf, mit CSS/HTML, Link und Definitionen.
+function zeigeCtas(quiz, ergebnis, band) {
+
+    const ctaTitelElement = ergebnis.querySelector('.result-cta-title');
+    const ctaPrimaerContainer = ergebnis.querySelector('.result-cta-primary-container');
+    const ctaSekundaerContainer = ergebnis.querySelector('.result-cta-secondary');
+    const ctaTertiaerContainer = ergebnis.querySelector('.result-cta-tertiary');
+    const ctaTertiaerText = ergebnis.querySelector('.result-cta-tertiary-text');
+
+ // CTA Titel
+    if (ctaTitelElement) {
+        ctaTitelElement.textContent = band.ctaTitle;
+    }
+ // Primärer CTA
+    if (ctaPrimaerContainer) {
+        ctaPrimaerContainer.innerHTML = '';
+        const primaerButton = baueCtaButton(
+            quiz, band.primary,
+            true
+        );
+        if (primaerButton) {
+            ctaPrimaerContainer.appendChild(primaerButton);
+        }
+    }
+ // Sekundäre CTAs
+    if (ctaSekundaerContainer) {
+        ctaSekundaerContainer.innerHTML = '';
+        band.secondary.forEach(function (schluessel) {
+            const knopf = baueCtaButton(quiz, schluessel,false);
+            if (knopf) {
+                ctaSekundaerContainer.appendChild(knopf);
+            }
+        });
+    }
+ // Tertiäre CTA
+    if (ctaTertiaerContainer) {
+        if (band.tertiaryText) {
+            ctaTertiaerContainer.style.display = '';
+            if (ctaTertiaerText) {
+                ctaTertiaerText.innerHTML = baueTertiaerText(quiz, band.tertiaryText);
+            }
+        } else {
+            ctaTertiaerContainer.style.display = 'none';
+            if (ctaTertiaerText) {
+                ctaTertiaerText.textContent = '';
+            }
+        }
+    }
+}
+ // ---------------------------Der Teil für Fragen und Antworten und Navigations Buttons------------------------
+ 
+    document.querySelectorAll('.worldview-quiz').forEach(function (quiz) {
+        const formular = quiz.querySelector('.worldview-quiz-form');
+        const willkommensSchritt = quiz.querySelector('.quiz-welcome');
+        const startKnopf = quiz.querySelector('.quiz-start');
+        const schritte = Array.from( quiz.querySelectorAll('.quiz-step:not(.quiz-welcome)'));
+        const ergebnis = quiz.querySelector('.worldview-result');
+        const zurueckKnopf = quiz.querySelector('.quiz-back');
+		const weiterKnopf = quiz.querySelector('.quiz-forward');
+        const neustartKnopf = quiz.querySelector('.quiz-restart');
+        const fortschritt = quiz.querySelector('.quiz-progress');
+        const fortschrittsBalken = quiz.querySelector('.quiz-progress-bar');
+        const fortschrittsText = quiz.querySelector('.quiz-progress-text');
+        const aktuelleFrageText = quiz.querySelector('.current-question');
+        const gesamtFragenText = quiz.querySelector('.total-questions');
+ /*
+ * Fragen Anzahl auf 0 und danach index +1 . Zeige-Schritt Funktion zeigt die aktuelle Frage an und 
+ * versteckt die anderen.
+ * Fortschrittsbalken wird aktualisiert. Zurück- und Weiter-Buttons werden versteckt, wenn nötig.
+ */
+    let aktuellerSchritt = 0;
+    gesamtFragenText.textContent = schritte.length;
+    function zeigeSchritt(index) {
+        aktuellerSchritt = index;
+        schritte.forEach(function (schritt, schrittIndex) { 
+		schritt.classList.toggle('active', schrittIndex === index);});
+        aktuelleFrageText.textContent = index + 1;
+        fortschrittsBalken.style.width = (((index + 1) / schritte.length) * 100) + '%';
+        zurueckKnopf.hidden = index === 0; weiterKnopf.hidden = index === schritte.length - 1; }
+  
+// Wenn Start-Button geklickt wird, wird die Welcome-Seite versteckt und die erste Frage angezeigt. Fortschrittsbalken und Text werden sichtbar.
+    function starteQuiz() {
+        willkommensSchritt.classList.remove('active');
+        fortschritt.hidden = false; fortschrittsText.hidden = false; formular.hidden = false;
+            zeigeSchritt(0);
+                }
+// Ergebnispunktzahl wird berechnet und die Ergebnisseite wird angezeigt.
+    function zeigeErgebnis() {
+        let punktzahl = 0;
+        formular.querySelectorAll( 'input[type="radio"]:checked').forEach(function (antwort) {
+            punktzahl += Number(antwort.value); });
+            const maximalePunktzahl = 20;
+            const prozentwert = Math.round((punktzahl /maximalePunktzahl) * 100);
+            const band = holeBandFuerProzentwert(prozentwert);
+ 
+// Auf der Ergebnisseite werden das Fragen-Formular versteckt und die Ergebnisseite angezeigt.
+        formular.hidden = true; fortschrittsText.hidden = true; fortschritt.hidden = true;
+            ergebnis.querySelector('.result-heading').textContent = band.heading;
+            ergebnis.querySelector('.result-score').textContent = punktzahl + ' von ' + maximalePunktzahl + ' Punkten (' + prozentwert + '%)';
+            ergebnis.querySelector('.result-message').textContent = band.message;
+            zeigeCtas(quiz, ergebnis, band);
+            ergebnis.hidden = false;
+                }
+// Wenn eine Antwort ausgewählt wird, wird nach einem kurzen Timeout die nächste Frage angezeigt
+            schritte.forEach(function (schritt, schrittIndex) {
+            schritt.querySelectorAll( 'input[type="radio"]').forEach(function (eingabe) {
+            eingabe.addEventListener('change', function () {
+            window.setTimeout(function () { if (schrittIndex < schritte.length - 1) { zeigeSchritt(schrittIndex + 1); } else { 
+                zeigeErgebnis(); }
+                }, 250);
+                        });
+                    });
+                });
+// Die Buttons 
+    startKnopf.addEventListener('click', starteQuiz);
+    zurueckKnopf.addEventListener('click', function () { if (aktuellerSchritt > 0) { 
+	zeigeSchritt(aktuellerSchritt - 1); }});
+    weiterKnopf.addEventListener('click', function () { if (aktuellerSchritt >= 0 && aktuellerSchritt < schritte.length - 1) {      
+	zeigeSchritt(aktuellerSchritt + 1); }});
+    neustartKnopf.addEventListener('click', function () {
+        formular.reset();
+        formular.hidden = false; 
+		ergebnis.hidden = true; 
+		fortschrittsText.hidden = false;
+		fortschritt.hidden = false;
+        zeigeSchritt(0); });
+        zeigeSchritt(0);
+            });
+        });
+    
+</script>
+</body>
+</html>
