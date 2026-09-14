@@ -33,6 +33,7 @@ body {
 .worldview-quiz {
     width: calc(100% - 32px);
     max-width: 980px;
+       height: 550px;
     min-height: 550px;
     margin: 30px auto;
     padding: 38px;
@@ -51,6 +52,7 @@ body {
     overflow: hidden;
     text-align: center;
     padding: 28px 0 0;
+    height: 100%;
     margin: 0;
 }
 
@@ -96,7 +98,7 @@ padding-top: 16px;
     max-width: 620px;
     margin: 32px auto 0;
     
-	padding-top: 100px;
+	margin-top: 85px;
     border-top: 1px solid #e6eef6;
     font-size: 12px;
     line-height: 1.5;
@@ -114,7 +116,12 @@ padding-top: 16px;
   color: #0053a6;
   border-color: #0053a6;
   }
-
+.worldview-quiz .quiz-meta {
+    margin: -8px 0 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+}
 
 /*-----------------------------------Anfang der Fragen ------------------------------------*/
  
@@ -304,17 +311,17 @@ transform: translateY(-2px);
     margin-bottom: 8px;
 }
 .worldview-result .result-message {
-font-weight: 300;
+    font-weight: 350;
     color: #080808;
     font-family: "Roboto", sans-serif;
     margin-bottom: 6px;
     margin-bottom:10px;
     font-size: 16px;
-    font-weight: 515;
 }
  .quiz-restart {
    font-size: 14px;
    font-weight: 700;
+   margin-top: 85px;
    font-family: "Roboto", sans-serif;
    color: #0053a6;
    background: transparent;
@@ -331,7 +338,7 @@ font-weight: 300;
     font-size: 16px;
     line-height: 1.5;
     font-family: "Roboto", sans-serif;
-    font-weight: 500;
+    font-weight: 350;
 }
 .worldview-result .result-cta-primary-container {
     margin-bottom: 14px;
@@ -472,6 +479,7 @@ font-weight: 300;
     Selbstbestimmung und Verantwortung orientiert, trägt vielleicht mehr Humanismus in sich,
     als zunächst gedacht.
 </p>
+<p>10 Fragen · ca. 2 Minuten</p>
 
     <button type="button" class="quiz-start"> Quiz starten</button>
     <p class="quiz-welcome-sub">
@@ -707,7 +715,7 @@ const Ergebnisse = [
         primary: 'humanismus',
         secondary: ['magazin','newsletter','podcast'],
 
-        tertiaryText: 'Jetzt {mitglied|Mitglied}/Freund*in in einem der LV werden, eine {veranstaltungen|Veranstaltungen} besuchen oder unsere {angebote|Angebote} einsehen.'  
+        tertiaryText: 'Weitere unserer {angebote|Angebote} einsehen.'  
          },
 
 
@@ -719,7 +727,7 @@ const Ergebnisse = [
         primary: 'humanismus',
         secondary: ['magazin','newsletter','podcast'],
 
-        tertiaryText: 'Jetzt {mitglied|Mitglied}/Freund*in in einem der LV werden, eine {veranstaltungen|Veranstaltungen} besuchen oder unsere {angebote|Angebote} einsehen.' 
+        tertiaryText: 'Weitere unserer {angebote|Angebote} einsehen.'
 
     }
 ];
